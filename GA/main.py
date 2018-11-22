@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 # 目标函数:maxf(x)=x1^2+x2^2+x3^2
 # 约束条件:x1=[0,7],x2=[0,7],x3=[0,7]
 
+# TODO:添加约束函数，现在是通过染色体的个数来约束的
 # 个体
 class Individual:
     fitness = 0
