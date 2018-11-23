@@ -112,12 +112,18 @@ class GA:
 if __name__ == '__main__':
     POP_SIZE = 10
     EPISODE = 100
-    VARIATION_P = 0.5
+    VARIATION_P = 0.1
     ga = GA()
     pop = [Individual() for _ in range(POP_SIZE)]
     ga.init_pop(pop)
     avgs, episodes = ga.evolution(pop, EPISODE, VARIATION_P)
+    acc = [7 * 7 * 3 for i in range(len(avgs))]
 
     plt.title('Result Analysis')
-    plt.plot(episodes, avgs, color='blue')
+    plt.plot(episodes, acc, color='red', label="max fitness")
+    plt.plot(episodes, avgs, color='blue', label="evolutionary algorithm")
+    plt.legend(loc="best")
+    plt.xlabel("episode")
+    plt.ylabel("avg fitness")
+    plt.savefig("result.png", dpi=100)
     plt.show()
