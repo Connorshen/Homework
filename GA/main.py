@@ -44,6 +44,7 @@ class GA:
     def fitness_avg(self, pop):
         return self.fitness_sum(pop) / len(pop)
 
+    # 选择
     def selection(self, pop):
         fitness_sum = self.fitness_sum(pop)
         p_select = []
@@ -58,6 +59,7 @@ class GA:
             selected_pop.append(self.in_range(pop, e, p_select))
         return selected_pop
 
+    # 交叉
     def alternate(self, pop):
         pop_size = len(pop)
         index_all = [i for i in range(pop_size)]
@@ -77,6 +79,7 @@ class GA:
         self.calculate_fitness(pop)
         return pop
 
+    # 变异
     def variation(self, pop, variation):
         for individual in pop:
             if np.random.random() < variation:
@@ -112,7 +115,7 @@ class GA:
 if __name__ == '__main__':
     POP_SIZE = 10
     EPISODE = 100
-    VARIATION_P = 0.1
+    VARIATION_P = 0.2
     ga = GA()
     pop = [Individual() for _ in range(POP_SIZE)]
     ga.init_pop(pop)
