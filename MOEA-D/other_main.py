@@ -160,12 +160,13 @@ def MOEAD(N, T):
     t = 0
     while (t < 20):
         t += 1
-        print
-        'PF number:', len(EP)
+        print('PF number:', len(EP))
         for i in range(N):
             k = random.randint(0, T - 1)
             l = random.randint(0, T - 1)
+            # 产生两个子代，一个交叉产生，一个变异产生
             y1, y2 = GeneticOperaton(p[B[i][k]], p[B[i][l]])
+            # 计算支配
             if Dominate(y1, y2):
                 y = y1
             else:

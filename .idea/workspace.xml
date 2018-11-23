@@ -10,16 +10,20 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/optimization_algorithm$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1542868517423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GA" />
-    <SUITE FILE_PATH="coverage/optimization_algorithm$main.coverage" NAME="main Coverage Results" MODIFIED="1542939765699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GA" />
+    <SUITE FILE_PATH="coverage/optimization_algorithm$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1542954337076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MOEA-D" />
+    <SUITE FILE_PATH="coverage/optimization_algorithm$other_main.coverage" NAME="other_main Coverage Results" MODIFIED="1542956660778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MOEA-D" />
+    <SUITE FILE_PATH="coverage/optimization_algorithm$main.coverage" NAME="main Coverage Results" MODIFIED="1542942531938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GA" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/GA/main.py">
+      <file leaf-file-name="other_main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MOEA-D/other_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="116" column="17" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
+            <state relative-caret-position="2755">
+              <caret line="145" column="22" lean-forward="true" selection-start-line="145" selection-start-column="22" selection-end-line="145" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -43,8 +47,9 @@
         <option value="$PROJECT_DIR$/GA.py" />
         <option value="$PROJECT_DIR$/GA/Genetic.py" />
         <option value="$PROJECT_DIR$/GA/Fitness.py" />
-        <option value="$PROJECT_DIR$/MOEA-D/main.py" />
         <option value="$PROJECT_DIR$/GA/main.py" />
+        <option value="$PROJECT_DIR$/MOEA-D/main.py" />
+        <option value="$PROJECT_DIR$/MOEA-D/other_main.py" />
       </list>
     </option>
   </component>
@@ -57,7 +62,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-1920" />
     <option name="y" value="23" />
     <option name="width" value="1920" />
@@ -85,12 +90,6 @@
               <item name="optimization-algorithm" type="b2602c69:ProjectViewProjectNode" />
               <item name="optimization-algorithm" type="462c0819:PsiDirectoryNode" />
               <item name="MOEA-D" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="optimization-algorithm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="optimization-algorithm" type="462c0819:PsiDirectoryNode" />
-              <item name="MOEA-D" type="462c0819:PsiDirectoryNode" />
-              <item name="paper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="optimization-algorithm" type="b2602c69:ProjectViewProjectNode" />
@@ -133,7 +132,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="other_main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="optimization-algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -141,12 +140,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GA" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MOEA-D" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GA/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MOEA-D/other_main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -154,7 +153,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
+        <item itemvalue="Python.other_main" />
       </list>
     </recent_temporary>
   </component>
@@ -172,7 +171,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="23" width="1920" height="1007" extended-state="6" />
+    <frame x="-1920" y="23" width="1920" height="1007" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -180,7 +179,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.41868132" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.41868132" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1656017" />
       <window_info anchor="right" id="R Packages" order="3" />
@@ -190,7 +189,7 @@
       <window_info anchor="right" id="SciView" order="3" weight="0.3290735" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4846154" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -214,7 +213,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="41" />
+      <option name="time" value="73" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -226,6 +225,11 @@
       </expression>
     </expressions>
     <expressions id="watch">
+      <expression>
+        <expression-string>len(a.x)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>pop[index_two[i]].chromosome.value</expression-string>
         <language-id>Python</language-id>
@@ -271,7 +275,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MOEA-D/main.py">
+    <entry file="file://$PROJECT_DIR$/MOEA-D/other_main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3075">
           <caret line="209" selection-start-line="209" selection-end-line="209" />
@@ -320,23 +324,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MOEA-D/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="152" column="24" lean-forward="true" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GA/result.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/GA/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="116" column="17" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
+        <state relative-caret-position="413">
+          <caret line="108" column="31" selection-start-line="108" selection-start-column="31" selection-end-line="108" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MOEA-D/other_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2755">
+          <caret line="145" column="22" lean-forward="true" selection-start-line="145" selection-start-column="22" selection-end-line="145" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
