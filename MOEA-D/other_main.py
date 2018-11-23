@@ -12,8 +12,9 @@ class Individual():
         self.NumX = len(x)
 
         f1 = float(x[0] / 10000)
-        h = float(1 + x[1] / 1000)
-        f2 = h * (1 - (f1 / h) ** 2 - (f1 / h) * np.sin(8 * np.pi * f1))
+        g = float(1 + x[1] / 10000)
+        h = 1 - np.sqrt(f1 / g)
+        f2 = g * h
         self.f = [f1, f2]  # multiobjective function
 
 
@@ -158,7 +159,7 @@ def MOEAD(N, T):
     z = BestValue(p)
     EP = []
     t = 0
-    while (t < 20):
+    while (t < 5):
         t += 1
         print('PF number:', len(EP))
         for i in range(N):
