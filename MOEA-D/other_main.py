@@ -20,16 +20,9 @@ class Individual():
 
 def Initial(N):
     # initialize the population and the weight vector lambda list
-    P = []
-    Lamb = []
-    for i in range(N):
-        temp = []
-        P.append(Individual([random.random() * 10000, random.random() * 10000]))
-        temp.append(float(i) / (N))
-        temp.append(1.0 - float(i) / (N))
-        Lamb.append(temp)
-
-    return P, Lamb
+    lamb = [[i / N, 1 - i / N] for i in range(N)]
+    pop = [Individual([np.random.random() * 10000 for _ in range(2)]) for _ in range(N)]
+    return pop, lamb
 
 
 # cal x dominated y or not
@@ -159,12 +152,12 @@ def MOEAD(N, T):
     z = BestValue(p)
     EP = []
     t = 0
-    while (t < 5):
+    while (t < 20):
         t += 1
         print('PF number:', len(EP))
         for i in range(N):
-            k = random.randint(0, T - 1)
-            l = random.randint(0, T - 1)
+            k = np.random.randint(0, T)
+            l = np.random.randint(0, T)
             # 产生两个子代，一个交叉产生，一个变异产生
             y1, y2 = GeneticOperaton(p[B[i][k]], p[B[i][l]])
             # 计算支配
