@@ -11,7 +11,7 @@ class Individual:
         self.x = Chromosome.decode(self.chromosomes)
         # 测试函数：https://blog.csdn.net/miscclp/article/details/38102831
         f1 = self.x[0]
-        g = 1 + self.x[1]
+        g = 1 + 9 * np.sum(self.x[1:]) / (self.n_x - 1)
         h = 1 - np.sqrt(f1 / g)
         f2 = g * h
         self.f = [f1, f2]
@@ -23,9 +23,9 @@ class Chromosome:
     @staticmethod
     def encode(xs):
         res = []
-        max_len = len(str(bin(10 ** 5)).replace("0b", ""))
+        max_len = len(str(bin(10 ** 4)).replace("0b", ""))
         for x in xs:
-            s = str(bin(int(x * (10 ** 5)))).replace("0b", "").zfill(max_len)
+            s = str(bin(int(x * (10 ** 4)))).replace("0b", "").zfill(max_len)
             res.append(s)
         return res
 
@@ -34,15 +34,16 @@ class Chromosome:
     def decode(chromosomes):
         res = []
         for chromosome in chromosomes:
-            res.append(int(chromosome, 2) / (10 ** 5))
+            res.append(int(chromosome, 2) / (10 ** 4))
         return res
 
 
 class MOEAD:
-    def __init__(self, n_pop, n_neighbor, episode):
+    def __init__(self, n_pop, n_neighbor, nx, episode):
         self.n_pop = n_pop
         self.n_neighbor = n_neighbor
         self.episode = episode
+        self.nx = nx
 
     # 交叉
     def crossover(self, pa, pb):
@@ -99,15 +100,10 @@ class MOEAD:
     @staticmethod
     def best_value(pop):
         best = []
-        nx = pop[0].n_x
-        xs = []
-        for individual in pop:
-            xs.append(individual.x)
-        xs = np.array(xs)
-        for i in range(nx):
-            x = xs[:, i]
-            min = np.min(x)
-            best.append(min)
+        ny = len(pop[0].f)
+        ys = np.array([individual.f for individual in pop])
+        for i in range(ny):
+            best.append(np.min(ys[:, i]))
         return best
 
     # 计算最近邻的索引
@@ -131,9 +127,9 @@ class MOEAD:
         return True
 
     # 初始化
-    def initial(self, n_pop):
+    def initial(self, n_pop, nx):
         lamb = [[i / n_pop, 1 - i / n_pop] for i in range(n_pop)]
-        pop = [Individual([np.random.random() for _ in range(2)]) for _ in range(n_pop)]
+        pop = [Individual([np.random.random() for _ in range(nx)]) for _ in range(n_pop)]
         return pop, lamb
 
     def update_z(self, y, z):
@@ -151,16 +147,17 @@ class MOEAD:
 
     # 开始执行进化算法
     def evolve(self):
-        pop, lamb = self.initial(n_pop=self.n_pop)
+        pop, lamb = self.initial(n_pop=self.n_pop, nx=self.nx)
         b = self.neighbor(lamb=lamb, n_neighbor=self.n_neighbor)
         ep = []
         # 参考点先设为种群中每个问题的最优解
         z = self.best_value(pop)
         for i in tqdm(range(self.episode)):
+            print('PF number:', len(ep))
             for j in range(self.n_pop):
-                k = np.random.randint(0, self.n_neighbor)
+                m = np.random.randint(0, self.n_neighbor)
                 l = np.random.randint(0, self.n_neighbor)
-                pa = pop[b[j][k]]
+                pa = pop[b[j][m]]
                 pb = pop[b[j][l]]
                 pc, pd = self.genetic_operaton(pa, pb)
                 y = pc if self.dominate(pc, pd) else pd
@@ -204,9 +201,11 @@ class MOEAD:
 
 
 if __name__ == '__main__':
-    N_POP = 500
+    N_POP = 1500
     N_NEIGHBOR = 10
-    EPISODE = 30
+    N_X = 2
+    EPISODE = 20
 
-    moead = MOEAD(n_pop=N_POP, n_neighbor=N_NEIGHBOR, episode=EPISODE)
+    np.random.seed(1)
+    moead = MOEAD(n_pop=N_POP, n_neighbor=N_NEIGHBOR, episode=EPISODE, nx=N_X)
     moead.evolve()

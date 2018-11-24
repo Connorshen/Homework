@@ -12,7 +12,7 @@ class Individual():
         self.NumX = len(x)
 
         f1 = float(x[0] / 10000)
-        g = float(1 + x[1] / 10000)
+        g = float(1 + 9 * x[1] / 10000)
         h = 1 - np.sqrt(f1 / g)
         f2 = g * h
         self.f = [f1, f2]  # multiobjective function
@@ -208,4 +208,5 @@ def MOEAD(N, T):
 
 
 if __name__ == '__main__':
+    np.random.seed(1)
     MOEAD(1500, 10)
