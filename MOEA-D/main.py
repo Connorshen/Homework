@@ -187,27 +187,28 @@ class MOEAD:
                             dominateY = True
                     if not dominateY:
                         ep.append(y)
-                    for k in range(len(rmlist)):
-                        ep.remove(rmlist[k])
+                        for k in range(len(rmlist)):
+                            ep.remove(rmlist[k])
             self.show_fig(ep)
         return ep
 
-    def show_fig(self, ep):
+    @staticmethod
+    def show_fig(ep):
         x = []
         y = []
         for i in range(len(ep)):
             x.append(ep[i].f[0])
             y.append(ep[i].f[1])
         plt.plot(x, y, '*')
-        plt.xlabel('f1')
-        plt.ylabel('f2')
+        plt.xlabel('function1')
+        plt.ylabel('function2')
         plt.show()
 
 
 if __name__ == '__main__':
-    N_POP = 100
+    N_POP = 1000
     N_NEIGHBOR = 10
-    EPISODE = 20
+    EPISODE = 50
 
     moead = MOEAD(n_pop=N_POP, n_neighbor=N_NEIGHBOR, episode=EPISODE)
     moead.evolve()
