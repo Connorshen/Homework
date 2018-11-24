@@ -1,13 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 
 class Individual:
 
     def __init__(self, x):
         self.n_x = len(x)
-        self.chromosome = Chromosome.encode(x)
-        self.x = Chromosome.decode(self.chromosome)
+        self.chromosomes = Chromosome.encode(x)
+        self.x = Chromosome.decode(self.chromosomes)
         # 测试函数：https://blog.csdn.net/miscclp/article/details/38102831
         f1 = self.x[0]
         g = 1 + self.x[1]
@@ -44,14 +45,61 @@ class MOEAD:
         self.episode = episode
 
     # 交叉
-    def crossover(self):
-        pass
+    def crossover(self, pa, pb):
+        chromosomes_a = pa.chromosomes
+        chromosomes_b = pb.chromosomes
+        chromosomes_c = []
+        for i in range(len(chromosomes_a)):
+            chromosome_a = chromosomes_a[i]
+            chromosome_b = chromosomes_b[i]
+            R = np.random.randint(0, len(chromosome_a))
+            chromosome_c = chromosome_a[:R] + chromosome_b[R:]
+            chromosomes_c.append(chromosome_c)
+        xs = Chromosome.decode(chromosomes_c)
+        xs = self.check_x(xs)
+        pc = Individual(xs)
+        return pc
+
+    @staticmethod
+    def check_x(xs):
+        for i in range(len(xs)):
+            if xs[i] > 1:
+                xs[i] = 1
+            if xs[i] < 0:
+                xs[i] = 0
+        return xs
 
     # 变异
-    def mutate(self):
-        pass
+    def mutate(self, pa, pb):
+        nx = pa.n_x
+        # 选择变异的解
+        r = np.random.random()
+        # 选择变异的x
+        l = np.random.randint(0, nx)
+        if r > 0.5:
+            mutate_p = pb
+        else:
+            mutate_p = pa
+        chromosome_mutate = mutate_p.chromosomes[l]
+        # 选择变异的染色体位置
+        R = np.random.randint(0, len(chromosome_mutate))
+        if chromosome_mutate[R] == "0":
+            chromosome_new = chromosome_mutate[:R] + "1" + chromosome_mutate[R + 1:]
+        else:
+            chromosome_new = chromosome_mutate[:R] + "0" + chromosome_mutate[R + 1:]
+        mutate_p.chromosomes[l] = chromosome_new
+        new_xs = Chromosome.decode(mutate_p.chromosomes)
+        new_xs = self.check_x(new_xs)
+        pd = Individual(new_xs)
+        return pd
 
-    def best_value(self, pop):
+    def genetic_operaton(self, pa, pb):
+        pc = self.crossover(pa, pb)
+        pd = self.mutate(pa, pb)
+        return pc, pd
+
+    @staticmethod
+    def best_value(pop):
         best = []
         nx = pop[0].n_x
         xs = []
@@ -64,6 +112,7 @@ class MOEAD:
             best.append(min)
         return best
 
+    # 计算最近邻的索引
     def neighbor(self, lamb, n_neighbor):
         b = []
         for i in range(len(lamb)):
@@ -87,7 +136,14 @@ class MOEAD:
         b = self.neighbor(lamb=lamb, n_neighbor=self.n_neighbor)
         ep = []
         z = self.best_value(pop)
-        print(1)
+        for i in tqdm(range(self.episode)):
+            for j in range(self.n_pop):
+                k = np.random.randint(0, self.n_neighbor)
+                l = np.random.randint(0, self.n_neighbor)
+                pa = pop[b[j][k]]
+                pb = pop[b[j][l]]
+                pc, pd = self.genetic_operaton(pa, pb)
+                print(1)
 
 
 if __name__ == '__main__':
