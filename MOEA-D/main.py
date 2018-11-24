@@ -204,9 +204,9 @@ class MOEAD:
 
 
 if __name__ == '__main__':
-    N_POP = 1500
+    N_POP = 500
     N_NEIGHBOR = 10
-    EPISODE = 20
+    EPISODE = 30
 
     moead = MOEAD(n_pop=N_POP, n_neighbor=N_NEIGHBOR, episode=EPISODE)
     moead.evolve()
