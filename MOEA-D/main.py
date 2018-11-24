@@ -18,7 +18,7 @@ class Individual:
 
 # 染色体
 class Chromosome:
-
+    # 编码成二进制字符串
     @staticmethod
     def encode(xs):
         res = []
@@ -28,6 +28,7 @@ class Chromosome:
             res.append(s)
         return res
 
+    # 解码成浮点数
     @staticmethod
     def decode(chromosomes):
         res = []
@@ -50,6 +51,19 @@ class MOEAD:
     def mutate(self):
         pass
 
+    def best_value(self, pop):
+        best = []
+        nx = pop[0].n_x
+        xs = []
+        for individual in pop:
+            xs.append(individual.x)
+        xs = np.array(xs)
+        for i in range(nx):
+            x = xs[:, i]
+            min = np.min(x)
+            best.append(min)
+        return best
+
     def neighbor(self, lamb, n_neighbor):
         b = []
         for i in range(len(lamb)):
@@ -71,6 +85,8 @@ class MOEAD:
     def evolve(self):
         pop, lamb = self.initial(n_pop=self.n_pop)
         b = self.neighbor(lamb=lamb, n_neighbor=self.n_neighbor)
+        ep = []
+        z = self.best_value(pop)
         print(1)
 
 
