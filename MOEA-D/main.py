@@ -124,17 +124,39 @@ class MOEAD:
             b.append(neighbor_index[:n_neighbor])
         return b
 
+    # 计算算法支配
+    def dominate(self, pa, pb):
+        y_n = len(pa.f)
+        for i in range(y_n):
+            if pa.f[i] > pb.f[i]:
+                return False
+        return True
+
     # 初始化
     def initial(self, n_pop):
         lamb = [[i / n_pop, 1 - i / n_pop] for i in range(n_pop)]
         pop = [Individual([np.random.random() for _ in range(2)]) for _ in range(n_pop)]
         return pop, lamb
 
+    def update_z(self, y, z):
+        for i in range(len(z)):
+            if y.f[i] < z[i]:
+                z[i] = y.f[i]
+        return z
+
+    @staticmethod
+    def tchebycheff(x, lamb, z):
+        distances = []
+        for i in range(len(x.f)):
+            distances.append(np.abs(x.f[i] - z[i]) * lamb[i])
+        return np.max(distances)
+
     # 开始执行进化算法
     def evolve(self):
         pop, lamb = self.initial(n_pop=self.n_pop)
         b = self.neighbor(lamb=lamb, n_neighbor=self.n_neighbor)
         ep = []
+        # 参考点先设为种群中每个问题的最优解
         z = self.best_value(pop)
         for i in tqdm(range(self.episode)):
             for j in range(self.n_pop):
@@ -143,7 +165,43 @@ class MOEAD:
                 pa = pop[b[j][k]]
                 pb = pop[b[j][l]]
                 pc, pd = self.genetic_operaton(pa, pb)
-                print(1)
+                y = pc if self.dominate(pc, pd) else pd
+                # 更新参考点
+                z = self.update_z(y, z)
+                # 如果解比邻居子问题离基准点z更近那么更新邻居的解
+                for k in range(len(b[j])):
+                    ta = self.tchebycheff(pop[b[j][k]], lamb[b[j][k]], z)
+                    tb = self.tchebycheff(y, lamb[b[j][k]], z)
+                    if tb < ta:
+                        pop[b[j][k]] = y
+                if not ep:
+                    ep.append(y)
+                else:
+                    # 是否支配y
+                    dominateY = False
+                    rmlist = []
+                    for k in range(len(ep)):
+                        if self.dominate(y, ep[k]):
+                            rmlist.append(ep[k])
+                        elif self.dominate(ep[k], y):
+                            dominateY = True
+                    if not dominateY:
+                        ep.append(y)
+                    for k in range(len(rmlist)):
+                        ep.remove(rmlist[k])
+            self.show_fig(ep)
+        return ep
+
+    def show_fig(self, ep):
+        x = []
+        y = []
+        for i in range(len(ep)):
+            x.append(ep[i].f[0])
+            y.append(ep[i].f[1])
+        plt.plot(x, y, '*')
+        plt.xlabel('f1')
+        plt.ylabel('f2')
+        plt.show()
 
 
 if __name__ == '__main__':
