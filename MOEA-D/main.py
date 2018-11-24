@@ -65,8 +65,6 @@ class MOEAD:
         for i in range(len(xs)):
             if xs[i] > 1:
                 xs[i] = 1
-            if xs[i] < 0:
-                xs[i] = 0
         return xs
 
     # 变异
@@ -206,9 +204,9 @@ class MOEAD:
 
 
 if __name__ == '__main__':
-    N_POP = 1000
+    N_POP = 1500
     N_NEIGHBOR = 10
-    EPISODE = 50
+    EPISODE = 20
 
     moead = MOEAD(n_pop=N_POP, n_neighbor=N_NEIGHBOR, episode=EPISODE)
     moead.evolve()
