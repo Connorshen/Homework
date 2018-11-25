@@ -7,8 +7,7 @@ class Individual:
 
     def __init__(self, x):
         self.n_x = len(x)
-        self.chromosomes = Chromosome.encode(x)
-        self.x = Chromosome.decode(self.chromosomes)
+        self.x = x
         # 测试函数：https://blog.csdn.net/miscclp/article/details/38102831
         f1 = self.x[0]
         g = 1 + 9 * np.sum(self.x[1:]) / (self.n_x - 1)
@@ -47,8 +46,8 @@ class MOEAD:
 
     # 交叉
     def crossover(self, pa, pb):
-        chromosomes_a = pa.chromosomes
-        chromosomes_b = pb.chromosomes
+        chromosomes_a = Chromosome.encode(pa.x)
+        chromosomes_b = Chromosome.encode(pb.x)
         chromosomes_c = []
         for i in range(len(chromosomes_a)):
             chromosome_a = chromosomes_a[i]
@@ -79,15 +78,16 @@ class MOEAD:
             mutate_p = pb
         else:
             mutate_p = pa
-        chromosome_mutate = mutate_p.chromosomes[l]
+        chromosomes = Chromosome.encode(mutate_p.x)
+        chromosome_mutate = chromosomes[l]
         # 选择变异的染色体位置
         R = np.random.randint(0, len(chromosome_mutate))
         if chromosome_mutate[R] == "0":
             chromosome_new = chromosome_mutate[:R] + "1" + chromosome_mutate[R + 1:]
         else:
             chromosome_new = chromosome_mutate[:R] + "0" + chromosome_mutate[R + 1:]
-        mutate_p.chromosomes[l] = chromosome_new
-        new_xs = Chromosome.decode(mutate_p.chromosomes)
+        chromosomes[l] = chromosome_new
+        new_xs = Chromosome.decode(chromosomes)
         new_xs = self.check_x(new_xs)
         pd = Individual(new_xs)
         return pd
@@ -201,9 +201,9 @@ class MOEAD:
 
 
 if __name__ == '__main__':
-    N_POP = 1500
+    N_POP = 500
     N_NEIGHBOR = 10
-    N_X = 30
+    N_X = 2
     EPISODE = 20
 
     np.random.seed(1)
