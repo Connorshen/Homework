@@ -12,16 +12,16 @@ class Individual():
         self.NumX = len(x)
 
         f1 = float(x[0] / 10000)
-        g = float(1 + 9 * x[1] / 10000)
+        g = float(1 + 9 * x[1] / 10000 / (self.NumX - 1))
         h = 1 - np.sqrt(f1 / g)
         f2 = g * h
         self.f = [f1, f2]  # multiobjective function
 
 
-def Initial(N):
+def Initial(N, NX):
     # initialize the population and the weight vector lambda list
     lamb = [[i / N, 1 - i / N] for i in range(N)]
-    pop = [Individual([np.random.random() * 10000 for _ in range(2)]) for _ in range(N)]
+    pop = [Individual([np.random.random() * 10000 for _ in range(NX)]) for _ in range(N)]
     return pop, lamb
 
 
@@ -143,11 +143,11 @@ def muate(c):
     return Individual(c.x)
 
 
-def MOEAD(N, T):
+def MOEAD(N, T, NX):
     # the main algorithm
     # N:population numbers
     # T:the number of neighborhood of each weight vector
-    p, Lamb = Initial(N)
+    p, Lamb = Initial(N, NX)
     B = Neighbor(Lamb, T)
     z = BestValue(p)
     EP = []
@@ -202,4 +202,4 @@ def MOEAD(N, T):
 
 if __name__ == '__main__':
     np.random.seed(1)
-    MOEAD(1500, 10)
+    MOEAD(1500, 10, 30)
