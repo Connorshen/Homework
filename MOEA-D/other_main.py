@@ -202,4 +202,4 @@ def MOEAD(N, T, NX):
 
 if __name__ == '__main__':
     np.random.seed(1)
-    MOEAD(500, 10, 30)
+    MOEAD(1000, 10, 3)

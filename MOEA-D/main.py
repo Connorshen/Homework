@@ -201,9 +201,9 @@ class MOEAD:
 
 
 if __name__ == '__main__':
-    N_POP = 500
+    N_POP = 1000
     N_NEIGHBOR = 10
-    N_X = 30
+    N_X = 3
     EPISODE = 20
 
     np.random.seed(1)
