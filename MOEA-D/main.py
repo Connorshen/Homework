@@ -11,7 +11,7 @@ class Individual:
         # 测试函数：https://blog.csdn.net/miscclp/article/details/38102831
         f1 = self.x[0]
         g = 1 + 9 * np.sum(self.x[1:]) / (self.n_x - 1)
-        h = 1 - np.sqrt(f1 / g)
+        h = 1 - (f1 / g) ** 2
         f2 = g * h
         self.f = [f1, f2]
 
@@ -184,7 +184,6 @@ class MOEAD:
                         ep.append(y)
                         for k in range(len(rmlist)):
                             ep.remove(rmlist[k])
-            self.show_fig(ep)
         return ep
 
     @staticmethod
@@ -197,15 +196,17 @@ class MOEAD:
         plt.plot(x, y, '*')
         plt.xlabel('function1')
         plt.ylabel('function2')
+        plt.savefig("moead.png", dpi=100)
         plt.show()
 
 
 if __name__ == '__main__':
     N_POP = 1000
     N_NEIGHBOR = 10
-    N_X = 4
-    EPISODE = 20
+    N_X = 30
+    EPISODE = 200
 
     np.random.seed(1)
     moead = MOEAD(n_pop=N_POP, n_neighbor=N_NEIGHBOR, episode=EPISODE, nx=N_X)
-    moead.evolve()
+    ep = moead.evolve()
+    moead.show_fig(ep)
