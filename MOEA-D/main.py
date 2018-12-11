@@ -219,7 +219,7 @@ class MOEAD:
         for i in range(len(ep)):
             f1 = ep[i].f[0]
             f2 = ep[i].f[1]
-            if f1 <= 1 and f2 <= 1 or self.test_func is  TestFunc.type_zdt4:
+            if f1 <= 1 and f2 <= 1 or self.test_func is TestFunc.type_zdt4:
                 x.append(f1)
                 y.append(f2)
         pareto = np.loadtxt("pareto/{}.txt".format(self.test_func))
@@ -227,7 +227,7 @@ class MOEAD:
         plt.plot(x, y, '*')
         plt.xlabel('function1')
         plt.ylabel('function2')
-        plt.legend(["PF", self.test_func], loc="best")
+        plt.legend(["PF", "MOEA/D"], loc="best")
         plt.title(self.test_func)
         plt.savefig(self.test_func + ".png", dpi=100)
         plt.show()
