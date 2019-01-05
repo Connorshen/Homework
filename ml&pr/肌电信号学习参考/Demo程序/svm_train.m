@@ -34,10 +34,10 @@ data_5 = [data_5_1 a5];
 
 %分别按照比例形成训练集和测试集
 [row, col] = size(data_1);
-data_traing = [data_1;data_2;data_3;data_4];
+data_traing = [data_1;data_2;data_3;data_4;data_5];
 [m, n] = size(data_traing);
 num_train = fix(m * 0.7);
-num_test = fix(m * 0.3);
+num_test = m - num_train;
 accuracy = zeros(30,1);
 
 for i = 1:30
