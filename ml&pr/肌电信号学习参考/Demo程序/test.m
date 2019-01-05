@@ -67,40 +67,40 @@ for i = 1:30
     TestLabel = TestData(:,end);
     TestData = TestData(1:num_test,1:col-1);
     
-% %     调用knn时需要先保存数据文件
-%     save F:\工作\EMG研究资料\Codes\2017.11.1\TrainData.txt TrainData -ascii
-%     save F:\工作\EMG研究资料\Codes\2017.11.1\TrainLabel.txt TrainLabel -ascii
-%     save F:\工作\EMG研究资料\Codes\2017.11.1\TestData.txt TestData -ascii
+    % %     调用knn时需要先保存数据文件
+    %     save F:\工作\EMG研究资料\Codes\2017.11.1\TrainData.txt TrainData -ascii
+    %     save F:\工作\EMG研究资料\Codes\2017.11.1\TrainLabel.txt TrainLabel -ascii
+    %     save F:\工作\EMG研究资料\Codes\2017.11.1\TestData.txt TestData -ascii
     
-% %  1.LDA分类
-    MdlLinear = fitcdiscr(TrainData,TrainLabel);
-    target = predict(MdlLinear,TestData);
-    for j = 1:num_test
-        if target(j,1) == TestLabel(j,1)
-            num = num+1;
-        end
-    end
-     accuracy(i,1) = num / num_test;
+    % %  1.LDA分类
+    %     MdlLinear = fitcdiscr(TrainData,TrainLabel);
+    %     target = predict(MdlLinear,TestData);
+    %     for j = 1:num_test
+    %         if target(j,1) == TestLabel(j,1)
+    %             num = num+1;
+    %         end
+    %     end
+    %      accuracy(i,1) = num / num_test;
     
-% %  2.SVM分类
-%     model = libsvmtrain(TrainLabel, TrainData,'-s 0 -t 1 -c 1 -g 0.125');
-%     [predict_label, accuracy1, dec_values] = libsvmpredict(TestLabel, TestData, model);
-%     accuracy(i) = accuracy1(1, 1);
-
-% %  3.knn分类
-%     warning('off');
-%     k = knnclassify(TestData,TrainData,TrainLabel',3,'cosine','random');
-%     for j = 1:num_test
-%         if k(j,1) == TestLabel(j,1)
-%             num = num+1;
-%         end
-%     end
-%     accuracy(i,1) = num / num_test;
- 
-% %  4.Bayes分类
-%     [ Priors Mus Sigmas numClass] = BayesTraining( TrainData, TrainLabel );
-%     [ TrainAccuracyWithRawData ] = BayesTesting( Priors,Mus,Sigmas,numClass , TrainData, TrainLabel );
-%     [ accuracy(i,1) ] = BayesTesting( Priors,Mus,Sigmas,numClass , TestData, TestLabel );
+    % %  2.SVM分类
+    %     classifer = fitcecoc(TrainData, TrainLabel);
+    %     predict_label = predict(classifer,TestData);
+    %     accuracy(i) = length(find(predict_label == TestLabel))/length(TestLabel);
+    
+    % %  3.knn分类
+    %     warning('off');
+    %     k = knnclassify(TestData,TrainData,TrainLabel',3,'cosine','random');
+    %     for j = 1:num_test
+    %         if k(j,1) == TestLabel(j,1)
+    %             num = num+1;
+    %         end
+    %     end
+    %     accuracy(i,1) = num / num_test;
+    
+    % %  4.Bayes分类
+    %     [ Priors Mus Sigmas numClass] = BayesTraining( TrainData, TrainLabel );
+    %     [ TrainAccuracyWithRawData ] = BayesTesting( Priors,Mus,Sigmas,numClass , TrainData, TrainLabel );
+    %     [ accuracy(i,1) ] = BayesTesting( Priors,Mus,Sigmas,numClass , TestData, TestLabel );
 end
 
 cpu_time = toc
