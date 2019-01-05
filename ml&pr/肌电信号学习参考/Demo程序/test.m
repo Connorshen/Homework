@@ -83,9 +83,9 @@ for i = 1:30
     %      accuracy(i,1) = num / num_test;
     
     % %  2.SVM分类
-    %     classifer = fitcecoc(TrainData, TrainLabel);
-    %     predict_label = predict(classifer,TestData);
-    %     accuracy(i) = length(find(predict_label == TestLabel))/length(TestLabel);
+    classifer = fitcecoc(TrainData, TrainLabel);
+    predict_label = predict(classifer,TestData);
+    accuracy(i) = length(find(predict_label == TestLabel))/length(TestLabel);
     
     % %  3.knn分类
     %     warning('off');
@@ -98,9 +98,9 @@ for i = 1:30
     %     accuracy(i,1) = num / num_test;
     
     % %  4.Bayes分类
-    %     [ Priors Mus Sigmas numClass] = BayesTraining( TrainData, TrainLabel );
-    %     [ TrainAccuracyWithRawData ] = BayesTesting( Priors,Mus,Sigmas,numClass , TrainData, TrainLabel );
-    %     [ accuracy(i,1) ] = BayesTesting( Priors,Mus,Sigmas,numClass , TestData, TestLabel );
+    %     classifer = fitcnb(TrainData, TrainLabel);
+    %     predict_label = predict(classifer,TestData);
+    %     accuracy(i) = length(find(predict_label == TestLabel))/length(TestLabel);
 end
 
 cpu_time = toc
